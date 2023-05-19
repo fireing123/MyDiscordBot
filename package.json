@@ -1,0 +1,31 @@
+{
+  "name": "mydiscordbot",
+  "version": "1.0.0",
+  "description": "MyDiscordBot GPT Music",
+  "main": "index.js",
+  "scripts": {
+    "setting": "node deploy-commands.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fireing123/MyDiscordBot.git"
+  },
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fireing123/MyDiscordBot/issues"
+  },
+  "homepage": "https://github.com/fireing123/MyDiscordBot#readme",
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.0.3",
+    "openai": "^3.2.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.83.1",
+    "webpack-cli": "^5.1.1"
+  }
+}
