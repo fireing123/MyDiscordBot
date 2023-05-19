@@ -1,14 +1,16 @@
 import { SlashCommandBuilder } from 'discord.js';
-import { ChatCompletion } from '../../modules/GPT';
+import { Completion } from '../../modules/GPT.js';
 
 export const data = new SlashCommandBuilder()
     .setName('chat')
     .setDescription('ChatGPT in discord!')
-    .addStringOption(option => option.setName('chat')
+    .addStringOption(option => 
+        option
+        .setName('chat')
         .setDescription('input chat')
         .setRequired(true))
 export async function execute(interaction) {
-    const prompt = interaction.option.getString('chat')
-    const response = ChatCompletion(prompt)
+    const prompt = interaction.options.getString('chat')
+    const response = await Completion(prompt, 150, 0.9, 1, 0.0, 0.6)
     interaction.editReply(response)
 }

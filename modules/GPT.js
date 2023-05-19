@@ -7,18 +7,18 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const ChatCompletion = (prompt) => {
+const ChatCompletion = (chatList) => {
     return new Promise(resolve => {
         openai.createChatCompletion({
           model: "gpt-3.5-turbo",
-          messages: [{role: "user", content: chat}]
+          messages: chatList
         }).then(res => {
-          resolve(chat + "\n" + res.data.choices[0].text)
+          resolve(res.data.choices[0].text)
         });
       });
 };
 
-const Completion = (prompt, max_token = 50, temperature = 0.9, top_p = 1, frequency_penalty = 0.0, presence_penalty = 0.6, stop) => {
+const Completion = (prompt, max_token, temperature, top_p, frequency_penalty, presence_penalty, stop) => {
     return new Promise(resolve => {
         openai.createCompletion({
             model: "text-davinci-003",

@@ -1,12 +1,11 @@
-import { client } from '../index'
-import { SendReady } from './ClientReady';
-import { MessageCreate } from './MessageCreate';
-import { InteractionCreate } from './InteractionCreate'
+import { SendReady } from './ClientReady.js';
+import { MessageCreate } from './MessageCreate.js';
+import { InteractionCreate } from './InteractionCreate.js';
 
-const SetEvents = () => {
-    client.once("ready", SendReady);
-    client.on("messageCreate", MessageCreate);
-    client.on("interactionCreate", InteractionCreate);
+const SetEvent = (client) => {
+    client.once("ready", () => SendReady(client.user.tag));
+    client.on("messageCreate", (message) => MessageCreate(message));
+    client.on("interactionCreate",async (interaction) => InteractionCreate(interaction));
 };
 
-export { SetEvents };
+export { SetEvent };

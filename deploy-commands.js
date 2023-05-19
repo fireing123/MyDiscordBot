@@ -1,35 +1,31 @@
 import { REST, Routes } from 'discord.js';
 import { config } from 'dotenv'; config();
 import { readdirSync } from 'node:fs';
-import path from 'node:path';
+import { join, resolve } from 'node:path';
 
 
 
-const __dirname = path.resolve();
+const __dirname = resolve();
 
 const commands = [];
 
-const foldersPath = path.join(__dirname, 'commands');
+const foldersPath = join(__dirname, 'commands');
 const commandFolders = readdirSync(foldersPath);
 
-let module = await import('"C:/Users/gimd8/OneDrive/바탕 화면/MyDiscordBot/modules/GPT"')
-
-/*
 for (const folder of commandFolders) {
-	// Grab all the command files from the commands directory you created earlier
-	const commandsPath = path.join(foldersPath, folder);
+
+	const commandsPath = join(foldersPath, folder);
 	const commandFiles = readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-	// Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
+
 	for (const file of commandFiles) {
-		const filePath = path.join(commandsPath, file);
-		console.log(filePath)
-        import(filePath).then(res => {console.log(res)})/*.then(command => {
-            if ('data' in command && 'execute' in command) {
-                commands.push(command.data.toJSON());
-            } else {
-                console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-            }
-        });
+		const filePath = `./commands/${folder}/${file}`;
+        const command = await import(filePath);
+        if ('data' in command && 'execute' in command) {
+            commands.push(command.data.toJSON());
+        } else {
+            console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+        }
+		console.log(commands)
 	}
 }
 
@@ -47,4 +43,4 @@ const rest = new REST().setToken(process.env.DISCORD_TOKEN);
 	} catch (error) {
 		console.error(error);
 	}
-})();*/
+})();

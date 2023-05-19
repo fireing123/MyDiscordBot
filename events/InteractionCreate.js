@@ -7,7 +7,7 @@ const InteractionCreate = async (interaction) => {
 		return;
     }
 
-    if (interaction.commandName in ['chat']) {
+    if (interaction.commandName == 'chat') {
 		await interaction.reply('응답을 기다리는중...')
 	}
     
