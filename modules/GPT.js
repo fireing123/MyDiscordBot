@@ -18,19 +18,20 @@ const ChatCompletion = (chatList) => {
       });
 };
 
-const Completion = (prompt, max_token, temperature, top_p, frequency_penalty, presence_penalty, stop) => {
+const Completion = (JSON) => {
     return new Promise(resolve => {
         openai.createCompletion({
             model: "text-davinci-003",
-            prompt: prompt,
-            max_tokens: max_token,
-            temperature: temperature,
-            top_p: top_p,
-            frequency_penalty: frequency_penalty,
-            presence_penalty:presence_penalty,
-            stop: stop
+            prompt: JSON.prompt,
+            max_tokens: JSON.max_token,
+            temperature: JSON.temperature,
+            top_p: JSON.top_p,
+            frequency_penalty: JSON.frequency_penalty,
+            presence_penalty: JSON.presence_penalty,
+            stop: JSON.stop
           }).then(res => {
-            resolve(prompt +"\n"+ res.data.choices[0].text)
+            console.log(JSON)
+            resolve(JSON.prompt +"\n"+ res.data.choices[0].text)
           });
     });
 };
